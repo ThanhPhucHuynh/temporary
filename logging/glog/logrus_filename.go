@@ -1,0 +1,64 @@
+package glog
+
+import (
+	"runtime"
+	"strings"
+	"sync"
+)
+
+var once sync.Once
+var logrusPackage string
+var getPackageNameFunc = getPackageName
+
+const (
+	maximumCallerDepth = 25
+	minimumCallerDepth = 4
+)
+
+func GetCaller(skip int) *runtime.Frame {
+	once.Do(func() {
+		pcs := make([]uintptr, maximumCallerDepth)
+		_ = runtime.Callers(0, pcs)
+		for i := 0; i < maximumCallerDepth; i++ {
+			funcName := runtime.FuncForPC(pcs[i]).Name()
+			if strings.Contains(funcName, "fireHooks") {
+				logrusPackage = getPackageNameFunc(funcName)
+				break
+			}
+		}
+	})
+
+	pcs := make([]uintptr, maximumCallerDepth)
+	depth := runtime.Callers(minimumCallerDepth, pcs)
+	frames := runtime.CallersFrames(pcs[:depth])
+
+	for f, again := frames.Next(); again; f, again = frames.Next() {
+		pkg := getPackageNameFunc(f.Function)
+
+		if pkg != logrusPackage {
+			if skip > 0 {
+				skip--
+				continue
+			}
+			// if pkg == "hdss-rest/pkg/glog" {
+			// 	continue
+			// }
+			return &f
+		}
+	}
+
+	return nil
+}
+
+func getPackageName(f string) string {
+	for {
+		lastPeriod := strings.LastIndex(f, ".")
+		lastSlash := strings.LastIndex(f, "/")
+		if lastPeriod > lastSlash {
+			f = f[:lastPeriod]
+		} else {
+			break
+		}
+	}
+	return f
+}
