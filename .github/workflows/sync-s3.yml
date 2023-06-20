@@ -1,9 +1,10 @@
 name: Sync S3 Bucket - update profile
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   sync-s3:
