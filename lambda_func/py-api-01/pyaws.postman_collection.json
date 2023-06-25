@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "156f30b4-a64b-4595-935f-b9b3b867cde3",
+		"name": "pyaws",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26936358",
+		"_collection_link": "https://cloudy-capsule-524464.postman.co/workspace/Team-Workspace~542e51e8-08b6-49fd-838a-4c2f440548a0/collection/26936358-156f30b4-a64b-4595-935f-b9b3b867cde3?action=share&creator=26936358&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "https://hsd80rz94b.execute-api.us-east-1.amazonaws.com/api/base64",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{uuid}}\",\n    \"requestTime\": \"{{timeRPC3339}}\",\n    \"data\": {\n          \"needEncode\": \"dsadasbbbb\",\n        \"needDecode\": \"SHV5bmggVGhuYWggcGh1Yw==\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://hsd80rz94b.execute-api.us-east-1.amazonaws.com/api/base64",
+					"protocol": "https",
+					"host": [
+						"hsd80rz94b",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"base64"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://hsd80rz94b.execute-api.us-east-1.amazonaws.com/api/signature",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{uuid}}\",\n    \"requestTime\": \"{{timeRPC3339}}\",\n    \"data\": {\n        \"plaintText\": \"dáddđ\",\n        \"secretKey\": \"123\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://hsd80rz94b.execute-api.us-east-1.amazonaws.com/api/signature",
+					"protocol": "https",
+					"host": [
+						"hsd80rz94b",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"signature"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://hsd80rz94b.execute-api.us-east-1.amazonaws.com/api/total",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"s\",\n    \"requestTime\": \"{{timeRPC3339}}\",\n    \"data\": {\n        \"value1\": 1,\n        \"value2\": 2\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://hsd80rz94b.execute-api.us-east-1.amazonaws.com/api/total",
+					"protocol": "https",
+					"host": [
+						"hsd80rz94b",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"total"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
