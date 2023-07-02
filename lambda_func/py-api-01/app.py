@@ -1,13 +1,17 @@
 from flask import Flask, jsonify, make_response, request
+import urllib3
+
 import uuid
 import datetime
 import json
 import hashlib
 import base64
 import borg
+
+import subprocess
 app = Flask(__name__)
 db = borg.DB()
-
+http = urllib3.PoolManager()
 @app.route("/")
 def hello_from_root():
     return jsonify(message='Hello from root!')
@@ -257,6 +261,83 @@ def get_user(username):
         }
 
     return jsonify(response)
+
+
+@app.route('/mobile', methods=['POST'])
+def check_mobile():
+    # Extract data from the request
+    request_id = request.json.get('requestId')
+    request_time = request.json.get('requestTime')
+    signature = request.json.get('signature')
+    data = request.json.get('data')
+
+    # Verify the signature
+    phone = data.get('phone')
+    username = data.get('username')
+    secret_key = 'golang'  # Replace with your secret key
+    expected_signature = hashlib.sha256((request_id + phone + username + secret_key).encode()).hexdigest()
+    print(expected_signature)
+    if signature != expected_signature:
+        return {
+            "responseId": request_id,
+            "responseTime": "current_time",
+            "responseCode": "INVALID_SIGNATURE",
+            "responseMessage": "Invalid signature"
+        }
+    phone_number = data.get('phone')
+    last_number = int(phone_number[-1])
+    # Perform any desired operations with the data
+    # ...
+
+    # Send the request using curl
+    payload = {
+        'requestId': request_id,
+        'data': {
+            'value': last_number
+        }
+    }
+        
+    # Set the request headers
+    headers = {
+        'x-api-key': 'B5d4JtTU8u1ggV8gp7OF88gcCGxZls6T3f5PYZSa',
+        'Content-Type': 'text/plain'
+    }
+
+    json_responseBody = json.dumps(payload)
+# Make the API request
+    response = http.request('POST', 'https://1g1zcrwqhj.execute-api.ap-southeast-1.amazonaws.com/dev/testapi', headers=headers, body=json_responseBody)
+    print("Status code:", response.status)    
+    data = json.loads(response.data)
+    if data['responseCode'] != "00":
+       return jsonify({
+        "responseId": request_id,
+        "responseTime": "current_time",
+        "responseCode": "SUCCESS",
+        "responseMessage": "KH HOP LE"
+        })
+    # Process the response
+    # if response.status_code == 400:
+    #     response_data = response.json()
+    #     # Process the response data
+    #     print(response_data)
+    # else:
+    #     # Handle the request error
+    #     print('Request failed with status code:', response)
+
+    # Process the response from the external API
+    # ...
+    # Return the response
+    
+    return jsonify({
+        "responseId": request_id,
+        "responseTime": "current_time",
+        "responseCode": "SUCCESS",
+        "responseMessage": "HOP LE"
+    })
+    
+   
+
+
 
 
 def get_user_by_username(username):

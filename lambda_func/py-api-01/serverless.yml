@@ -10,7 +10,18 @@ provider:
   name: aws
   runtime: python3.8
   environment:
-  
+    PG_DATABASE: yairsggo
+    PG_USER: yairsggo
+    PG_HOST: rajje.db.elephantsql.com
+    PG_PASS: MbuwvGgJcC-nXskeCQnhunp8C93XC2-p 
+
+# export AWS_ACCESS_KEY_ID=AKIA5BN2AGXHMECNVN4I
+# export AWS_SECRET_ACCESS_KEY=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
+# export AWS_DEFAULT_REGION=us-east-1
+# export PG_DATABASE=yairsggo
+# export PG_USER=yairsggo
+# export PG_HOST=rajje.db.elephantsql.com
+# export PG_PASS=MbuwvGgJcC-nXskeCQnhunp8C93XC2-p 
 functions:
   api:
     handler: wsgi_handler.handler
