@@ -1,4 +1,4 @@
-import { EMBED_TO, EMBED_URL, EMBED_VIDSRC, IMAGE_URL } from "./constants";
+import { EMBED_URL, EMBED_VIDSRC, IMAGE_URL } from "./constants";
 
 export const resizeImage = (
   imageUrl: string,
