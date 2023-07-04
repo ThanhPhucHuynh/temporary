@@ -27,7 +27,7 @@ jobs:
           aws-region: ${{ secrets.YOUR_AWS_REGION }} # Replace with your desired AWS region
       - name: addenv
         run: |
-          echo 'REACT_APP_API_KEY=${{ secrets.LOCAL_DIRECTORY_PANDA }}' >> panda-films/.env
+          echo 'REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}' >> panda-films/.env
       - name: install
         run: |
           cd panda-films && npm i
