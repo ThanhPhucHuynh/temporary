@@ -9,11 +9,16 @@ on:
 jobs:
   sync-s3:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -21,6 +26,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.YOUR_AWS_REGION }} # Replace with your desired AWS region
 
+      - name: install
+        run: |
+          npm i
+      - name: build
+        run: |
+          npm run build
       - name: Sync S3 bucket
         run: |
+          npm
           aws s3 sync ${{ secrets.LOCAL_DIRECTORY_PANDA }} s3://${{ secrets.BUCKET_NAM_PANDA }} --delete
