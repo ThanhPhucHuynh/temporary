@@ -33,5 +33,4 @@ jobs:
            export CI=false && cd panda-films && npm run build
       - name: Sync S3 bucket
         run: |
-          npm
           aws s3 sync ${{ secrets.LOCAL_DIRECTORY_PANDA }} s3://${{ secrets.BUCKET_NAM_PANDA }} --delete
