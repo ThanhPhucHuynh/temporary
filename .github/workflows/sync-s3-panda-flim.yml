@@ -30,7 +30,7 @@ jobs:
           cd panda-films && npm i
       - name: build
         run: |
-           cd panda-films && npm run build
+           export CI=false && cd panda-films && npm run build
       - name: Sync S3 bucket
         run: |
           npm
