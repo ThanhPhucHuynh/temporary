@@ -27,13 +27,13 @@ jobs:
           aws-region: ${{ secrets.YOUR_AWS_REGION }} # Replace with your desired AWS region
       - name: addenv
         run: |
-          echo 'REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}' >> panda-films/.env
+          echo 'REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}' >> phimdeee/.env
       - name: install
         run: |
-          cd panda-films && npm i
+          cd phimdeee && npm i
       - name: build
         run: |
-           export CI=false && cd panda-films && npm run build
+           export CI=false && cd phimdeee && npm run build
       - name: Sync S3 bucket
         run: |
           aws s3 sync ${{ secrets.LOCAL_DIRECTORY_PANDA }} s3://${{ secrets.BUCKET_NAM_PANDA }} --delete

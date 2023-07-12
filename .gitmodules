@@ -1,3 +1,6 @@
 [submodule "panda-films-ts"]
 	path = panda-films-ts
 	url = https://github.com/ThanhPhucHuynh/phimdeee.git
+[submodule "phimdeee"]
+	path = phimdeee
+	url = https://github.com/ThanhPhucHuynh/phimdeee.git
