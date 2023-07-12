@@ -4,3 +4,6 @@
 [submodule "phimdeee"]
 	path = phimdeee
 	url = https://github.com/ThanhPhucHuynh/phimdeee.git
+[submodule "validator"]
+	path = validator
+	url = https://github.com/ThanhPhucHuynh/validator.git
