@@ -165,7 +165,7 @@ const FilmWatch: FunctionComponent<FilmWatchProps & getWatchReturnedType> = ({
                 }
                 data-te-ripple-init
                 data-te-ripple-color="light">
-                Embed
+                Server 1
               </button>
               <button
                 type="button"
@@ -176,7 +176,7 @@ const FilmWatch: FunctionComponent<FilmWatchProps & getWatchReturnedType> = ({
                 }
                 data-te-ripple-init
                 data-te-ripple-color="light">
-                Vidsrc
+                 Server 2
               </button>
               <button
                 type="button"
@@ -188,7 +188,7 @@ const FilmWatch: FunctionComponent<FilmWatchProps & getWatchReturnedType> = ({
                 }
                 data-te-ripple-init
                 data-te-ripple-color="light">
-                Right
+                 Server 3
               </button>
             </div>
           </div>
